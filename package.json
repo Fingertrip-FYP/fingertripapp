@@ -11,18 +11,37 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
+    "bcryptjs": "^2.4.3",
     "events": "^3.3.0",
     "expo": "~48.0.9",
     "expo-status-bar": "~1.4.4",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.2.0",
+    "nodemon": "^2.0.22",
     "react": "18.2.0",
     "react-native": "0.71.4",
+    "sequelize": "^6.30.0",
     "url": "^0.11.0",
     "util": "^0.12.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "description": "App for Fingertrip compatible with Android and iOS",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fingertrip-FYP/Fingertrip-App.git"
+  },
+  "keywords": [
+    "HotelRoomService"
+  ],
+  "author": "Kartik Simran Varun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fingertrip-FYP/Fingertrip-App/issues"
+  },
+  "homepage": "https://github.com/Fingertrip-FYP/Fingertrip-App#readme"
 }
