@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from './pages/splashscreen';
 import LanguageScreen from './pages/ChooseLanguage';
-import SignInScreen from './pages/SignIn';
+import SignInPage from './pages/SignIn';
 import WelcomeScreen from './pages/welcome';
 import HomeScreen from './pages/homescreen';
 
@@ -24,7 +24,7 @@ const App = () => {
         />
         <Stack.Screen
           name="SignIn"
-          component={SignInScreen}
+          component={SignInPage}
           options={{ headerShown: false }}
         />
         <Stack.Screen
