@@ -1,15 +1,38 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
 
-function SignInScreen() {
+const backgroundImage = require('../assets/signin-bg2.png');
+
+const SignInPage = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+
+  const handleSignIn = () => {
+    if (username === "70362019039" && password === "Pass$2019@")
+    navigation.navigate('SignIn');
+    else
+    Alert.alert("Invalid Credentials");
+  };
+
   return (
-    <ImageBackground source={require('../assets/signin-bg2.png')} style={styles.background}>
+    <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
       <View style={styles.container}>
         <Text style={styles.title}>Sign In</Text>
-        <TextInput style={styles.input} placeholder="User ID" value={userID} onChangeText={setUserID} />
-        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} value={password} onChangeText={setPassword} />
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          onChangeText={text => setUsername(text)}
+          value={username}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          onChangeText={text => setPassword(text)}
+          value={password}
+          secureTextEntry={true}
+        />
         <TouchableOpacity style={styles.button} onPress={handleSignIn}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
@@ -19,38 +42,37 @@ function SignInScreen() {
 };
 
 const styles = StyleSheet.create({
-  background: {
+  backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
+    justifyContent: 'center'
   },
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20
   },
   title: {
-    fontSize: 24,
+    fontFamily: 'Poppins',
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 20,
-    color: 'white',
+    marginBottom: 20
   },
   input: {
-    width: '80%',
     height: 40,
-    padding: 10,
+    borderColor: 'gray',
+    borderWidth: 1,
     marginBottom: 10,
-    backgroundColor: 'white',
+    paddingHorizontal: 10
   },
   button: {
-    width: '80%',
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5
   },
   buttonText: {
     color: 'white',
-  },
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }
 });
 
-export default SignInScreen;
+export default SignInPage;

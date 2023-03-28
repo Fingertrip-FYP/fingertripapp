@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import * as Font from 'expo-font';
 
 export default function ChooseLanguageScreen() {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
   const languages = [
     'English',
     'Spanish',
@@ -27,6 +30,16 @@ export default function ChooseLanguageScreen() {
   const handleLanguagePress = (language) => {
     navigation.navigate('SignIn');
   };
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'poppins-semibold': require('../assets/fonts/Poppins-SemiBold.ttf'),
+      });
+      setFontLoaded(true);
+    }
+    loadFont();
+  }, []);
 
   return (
     <ImageBackground
@@ -58,25 +71,23 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginBottom: 40,
+    fontFamily: 'poppins-semibold',
+    fontSize: 30,
+    color: '#36454F',
+    marginBottom: 50,
   },
   scrollView: {
-    width: '80%',
+    width: '60%',
     maxHeight: '60%',
-    marginBottom: 40,
   },
   languageButton: {
     paddingVertical: 16,
     paddingHorizontal: 32,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F3F3F3',
     borderRadius: 16,
     marginBottom: 16,
     alignItems: 'center',
@@ -84,6 +95,6 @@ const styles = StyleSheet.create({
   languageText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#000000',
+    color: '#36454F',
   },
 });
