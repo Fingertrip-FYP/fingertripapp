@@ -1,101 +1,102 @@
-import React from 'react';
-import { View, ImageBackground, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, ImageBackground, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import CarouselCards from './displaycarousel'
+import FoodMenu from './food.js';
+import ServicesMenu from './services.js';
+import Explore from './explore.js';
+import UserAc from './user.js';
 
 const HomeScreen = () => {
+  const Tab = createBottomTabNavigator();
+
+  function HomeScreen() {
+
+    return (
+      <SafeAreaView style={styles.carouselcontainer}>
+        <CarouselCards />
+      </SafeAreaView>
+    )
+
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Home</Text>
+      </View>
+    );
+  }
+  function FoodMenu() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Food</Text>
+      </View>
+    );
+  }
+  function ServicesMenu() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Services</Text>
+      </View>
+    );
+  }
+  function Explore() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Explore</Text>
+      </View>
+    );
+  }
+  function UserAc() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>User</Text>
+      </View>
+    );
+  }
+
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'condiment': require('../assets/fonts/Condiment-Regular.ttf'),
+        'poppins-semibold': require('../assets/fonts/Poppins-SemiBold.ttf'),
+        'poppins-regular': require('../assets/fonts/Poppins-Regular.ttf'),
+      });
+      setFontLoaded(true);
+    }
+    loadFont();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('../assets/welcome-bg.png')} style={styles.background}>
-        <View style={styles.header}>
-          <Image source={require('../assets/welcome-bg.png')} style={styles.logo} />
-          <TouchableOpacity style={styles.searchButton}>
-            <Image source={require('../assets/welcome-bg.png')} style={styles.searchIcon} />
-            <Text style={styles.searchText}>Search for restaurants, cuisines or dishes</Text>
-          </TouchableOpacity>
-          <Image source={require('../assets/welcome-bg.png')} style={styles.profileIcon} />
-        </View>
-        <View style={styles.categories}>
-          {/* add category icons here */}
-        </View>
-        <View style={styles.offers}>
-          {/* add offer banners here */}
-        </View>
-        <View style={styles.restaurants}>
-          {/* add restaurant listings here */}
-        </View>
+    <><View style={styles.container}>
+      <ImageBackground
+        source={require('../assets/welcome-bg.png')}
+        style={styles.backgroundimage}
+      >
       </ImageBackground>
-    </View>
+    </View><Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Food" component={FoodMenu} />
+        <Tab.Screen name="Services" component={ServicesMenu} />
+        <Tab.Screen name="Explore" component={Explore} />
+        <Tab.Screen name="User" component={UserAc} />
+      </Tab.Navigator></>
   );
 };
 
 const styles = StyleSheet.create({
+  carouselcontainer: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  background: {
+  backgroundimage: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 20,
-  },
-  logo: {
-    width: 120,
-    height: 30,
-  },
-  searchButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    marginHorizontal: 10,
-  },
-  searchIcon: {
-    width: 20,
-    height: 20,
-  },
-  searchText: {
-    marginLeft: 10,
-    color: 'gray',
-    fontSize: 14,
-  },
-  profileIcon: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: 'white',
-    marginRight: 10,
-  },
-  categories: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f2f2f2',
-  },
-  offers: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: '#f8f8f8',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f2f2f2',
-  },
-  restaurants: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
   },
 });
 
