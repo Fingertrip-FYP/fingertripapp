@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Font from 'expo-font';
@@ -34,6 +34,7 @@ export default function ChooseLanguageScreen() {
   useEffect(() => {
     async function loadFont() {
       await Font.loadAsync({
+        'poppins-medium': require('../assets/fonts/Poppins-Medium.ttf'),
         'poppins-semibold': require('../assets/fonts/Poppins-SemiBold.ttf'),
       });
       setFontLoaded(true);
