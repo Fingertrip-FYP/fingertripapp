@@ -7,10 +7,10 @@ const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('Language');
-    }, 7000);
+    }, 5000);
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(5000);
     };
   }, [navigation]);
 
