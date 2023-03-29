@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
-import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native';
 import * as Font from 'expo-font';
 
 const Splash = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('Home');
+      navigation.navigate('Home');
     }, 5000);
+
+    return () => {
+      clearTimeout(5000);
+    };
   }, [navigation]);
 
   useEffect(() => {
@@ -27,8 +31,9 @@ const Splash = ({ navigation }) => {
         style={styles.backgroundimage}
       >
         <View style={styles.overlay}>
-          <Image source={require('./assets/welcome-logo.png')} style={styles.image} />
+          <Image source={require('../assets/welcome-logo.png')} style={styles.image} />
           <Text style={styles.text}>Welcome Name</Text>
+          <Text style={styles.text1}>Enjoy your stay at the Taj</Text>
         </View>
       </ImageBackground>
     </View>
@@ -38,13 +43,9 @@ const Splash = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   backgroundimage: {
     flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
   },
   image: {
     width: 200,
@@ -53,13 +54,19 @@ const styles = StyleSheet.create({
   },
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     fontFamily: 'poppins-bold',
     fontSize: 30,
+    color: '#36454F',
+    textAlign: 'center',
+  },
+  text1: {
+    fontFamily: 'poppins-semibold',
+    fontSize: 24,
     color: '#36454F',
     textAlign: 'center',
   },
