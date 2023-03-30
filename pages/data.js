@@ -1,15 +1,15 @@
 const data = [
     {
-      imgUrl: "../assets/slideshow1.png",
+      imgUrl: "https://picsum.photos/id/11/200/300",
     },
     {
-      imgUrl: "../assets/slideshow2.png",
+      imgUrl: "https://picsum.photos/id/11/200/300",
     },
     {
-      imgUrl: "../assets/slideshow3.png",
+      imgUrl: "https://picsum.photos/id/11/200/300",
     },
     {
-      imgUrl: "../assets/slideshow4.png",
+      imgUrl: "https://picsum.photos/id/11/200/300",
     },
   ];
   

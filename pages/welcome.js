@@ -5,7 +5,7 @@ import * as Font from 'expo-font';
 const Splash = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Home');
+      navigation.navigate('Splash');
     }, 5000);
 
     return () => {
