@@ -4,7 +4,7 @@ const SplashScreen = () => {
   return (
     <div
       style={{
-        backgroundImage: url("../assets/backgroundimages/splashscreen-bg.png"),
+        backgroundImage: "url('./backgroud/splashscreen-bg.png)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",

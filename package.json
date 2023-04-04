@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-navigation/stack": "^6.3.16",
     "firebase": "^9.19.1",
     "next": "^13.2.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-native": "^0.71.6",
+    "react-navigation": "^4.4.4"
   },
   "devDependencies": {
     "eslint": "8.37.0",
