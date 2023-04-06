@@ -12,7 +12,7 @@ const AuthDetails = () => {
       if (user) {
         console.log("triggered")
         // return redirect("/splash");
-        navigate('/', { replace: true });
+        navigate('/splash', { replace: true });
       }
     });
 

@@ -7,13 +7,13 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const signIn = (e) => {
-  //   e.preventDefault();
-  //   signInWithEmailAndPassword(auth, email, password)
-  //     .then((userCredential) => {
-  //       console.log(userCredential);
-  //     });
-  // };
+  const signIn = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+      });
+  };
 
   return (
     <div className="sign-in-container">
@@ -33,11 +33,7 @@ const SignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br />
-        <button type="submit">
-          <a href="./splash.js">
-            Log
-          </a>
-        </button>
+        <button type="submit">Log In</button>
       </form>
     </div>
   );
