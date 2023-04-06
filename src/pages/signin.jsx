@@ -17,7 +17,7 @@ const SignIn = () => {
 
   return (
     <div className="sign-in-container">
-      <form>
+      <form onSubmit={signIn}>
         <h1>Log In to your Account</h1>
         <input
           type="email"

@@ -3,8 +3,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "./firebase";
 import { useNavigate, redirect } from "react-router-dom";
+import Splash from "../pages/splash";
 
-const AuthDetails = () => {
+const AuthDetails = ({ navigation }) => {
   let navigate = useNavigate();
 
   const loader = async () => {
@@ -12,7 +13,8 @@ const AuthDetails = () => {
       if (user) {
         console.log("triggered")
         // return redirect("/splash");
-        navigate('/splash', { replace: true });
+        navigation.navigate('./Splash')
+        // navigate('/splash', { replace: true });
       }
     });
 
