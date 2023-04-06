@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../firebase/firebase";
@@ -6,17 +7,17 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      });
-  };
+  // const signIn = (e) => {
+  //   e.preventDefault();
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((userCredential) => {
+  //       console.log(userCredential);
+  //     });
+  // };
 
   return (
     <div className="sign-in-container">
-      <form onSubmit={signIn}>
+      <form>
         <h1>Log In to your Account</h1>
         <input
           type="email"
@@ -32,7 +33,11 @@ const SignIn = () => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br />
-        <button type="submit">Log In</button>
+        <button type="submit">
+          <a href="./splash.js">
+            Log
+          </a>
+        </button>
       </form>
     </div>
   );

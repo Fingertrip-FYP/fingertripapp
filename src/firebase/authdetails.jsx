@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "./firebase";
@@ -7,7 +8,7 @@ const AuthDetails = () => {
   let navigate = useNavigate();
 
   const loader = async () => {
-    const listen = onAuthStateChanged(auth, (user) => {
+    const listen = await onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("triggered")
         // return redirect("/splash");

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SignIn from "./pages/signin";
@@ -8,8 +9,8 @@ export default function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="signin" element={ <SignIn /> } />    
-                <Route path="/*" element={ <Splash /> } />    
+                <Route path="/" element={ <SignIn /> } />    
+                <Route path="/splash" element={ <Splash /> } />    
             </Routes>
         </div>
     );
