@@ -13,7 +13,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { useSnapCarousel } from 'react-snap-carousel';
 import { Link } from "react-router-dom";
 
-function Home() {
+function Food() {
     const [value, setValue] = React.useState(0);
     const ref = React.useRef(null);
     const { scrollRef } = useSnapCarousel();
@@ -126,7 +126,7 @@ function Home() {
             }}>
                 <div
                 style={{
-                    backgroundColor: 'blue',
+                    backgroundColor: 'green',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -141,7 +141,7 @@ function Home() {
                 </div>
                 <div
                 style={{
-                    backgroundColor: 'blue',
+                    backgroundColor: 'green',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -156,7 +156,7 @@ function Home() {
                 </div>
                 <div
                 style={{
-                    backgroundColor: 'blue',
+                    backgroundColor: 'green',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -222,21 +222,11 @@ function Home() {
                 onChange={(event, newValue) => {
                     setValue(newValue);
                 }}>
-                    <Link to="/home">
-                        <BottomNavigationAction label="Home" icon={<HomeIcon />}/>
-                    </Link>
-                    <Link to="/food">
-                        <BottomNavigationAction label="Food" icon={<RestaurantIcon />} />
-                    </Link>
-                    <Link to="/services">
-                        <BottomNavigationAction label="Services" icon={<CleaningServicesIcon />} />
-                    </Link>
-                    <Link to="/explore">
-                        <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-                    </Link>
-                    <Link to="/user">
-                        <BottomNavigationAction label="User" icon={<PersonIcon />} />
-                    </Link>
+                    <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/home"/>
+                    <BottomNavigationAction label="Food" icon={<RestaurantIcon />} Component={Link} to="/food" />
+                    <BottomNavigationAction label="Services" icon={<CleaningServicesIcon />} />
+                    <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+                    <BottomNavigationAction label="User" icon={<PersonIcon />} />
                 </BottomNavigation>
             </Paper>     
             </Box>
@@ -244,4 +234,4 @@ function Home() {
       );
 }
 
-export default Home;
+export default Food;
