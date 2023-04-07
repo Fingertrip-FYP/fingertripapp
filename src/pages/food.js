@@ -10,11 +10,16 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import ExploreIcon from '@mui/icons-material/Explore';
 import PersonIcon from '@mui/icons-material/Person';
-// import { useSnapCarousel } from 'react-snap-carousel';
+import 'reactjs-popup/dist/index.css';
 import { Link } from "react-router-dom";
-// import ReactSlider from "react-slider";
+import ReadMoreReact from 'read-more-react';
+import { Product } from "./items";
+import { IMG_CDN_URL } from "./constants";
+import ItemQuantity from "./ItemQuantity";
+import { ShimmerLines } from "./Shimmer";
+import { FaRegStopCircle, FaRegCaretSquareUp } from "react-icons/fa";
 
-function Food() {
+function Food({ menuItems }) {
     const [value, setValue] = React.useState(0);
     const ref = React.useRef(null);
     
@@ -114,15 +119,74 @@ function Food() {
                 </div>
             
             {/* Menu Items */}
-            <div
+            return !menuItems ? (
+    <ShimmerLines />
+  ) : (
+    <div className="restaurant-menu">
+      {Object.values(menuItems).map((item) => (
+        <div className="menu-items" key={item.card.info?.id}>
+          <div className="item-details">
+            <div className="item-extras">
+              {/* Check for veg/non veg */}
+              {item.card.info?.itemAttribute?.vegClassifier === "NONVEG" ? (
+                <FaRegCaretSquareUp className="nonveg" size="1.25rem" />
+              ) : (
+                <FaRegStopCircle className="veg" size="1.25rem" />
+              )}
+              {/* Check for Bestsellers */}
+              {item?.card?.info?.ribbon?.text === "Bestseller" && (
+                <span className="bestseller">
+                  <i className="fa fa-star"></i> Bestseller
+                </span>
+              )}
+            </div>
+
+            <h4>{item.card.info?.name}</h4>
+
+            <p>₹{item.card.info?.price / 100}</p>
+            <span className="item-desc">{item.card.info?.description}</span>
+          </div>
+          <div className="item-img">
+            {!item.card.info?.imageId ? null : (
+              <img src={IMG_CDN_URL + item.card.info?.imageId} />
+            )}
+            <div className="cart-action">
+              <ItemQuantity item={item.card.info} key={item.card.info.id} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+            {/* <div
             style={{
                 position: 'absolute',
-                width: '330px',
-                height: '550px',
+                width: '350px',
+                height: '500px',
                 left: '28px',
                 top: '266px',
-                overflowY: 'scroll',
             }}>
+                <div
+                style={{
+                    position: 'absolute',
+                    width: '106px',
+                    height: '106px',
+                    right: '0px',
+                    top: '0px',
+                    backgroundImage: `url('https://drive.google.com/uc?export=view&id=1xhj8fztHoetXucp588at1KnhDSuBO5qW')`,
+                }}>
+                    <button
+                    style={{
+                        color: 'blue',
+                        position: 'absolute',
+                        width: '78.4px',
+                        height: '28px',
+                        left: '14%',
+                        top: '90%',
+                    }}>
+                        Add
+                    </button>
+                </div>
                 <div
                 style={{
                     position: 'absolute',
@@ -157,24 +221,31 @@ function Food() {
                     }}>Rs. 220</p>
                     <p
                     style={{
+                        position: 'absolute',
+                        left: '0%',
+                        right: '33.96%',
+                        top: '30%',
+                        bottom: '11.67%',
+                        fontFamily: 'Poppins',
+                        fontStyle: 'normal',
+                        fontWeight: '300',
+                        fontSize: '14px',
+                        lineHeight: '14px',
+                        display: 'flex',
+                        alignItems: 'left',
+                        color: '#36454F',
                         textAlign: 'left',
+                        width: '50%',
                     }}>
-                    Chicken Biryani is a savory chicken and rice dish that includes layers of
-                    <Link></Link>
-                    </p>
+                    <ReadMoreReact text={"Chicken Biryani is a savory chicken and rice dish that includes layers of chicken, rice, and aromatics that are steamed together. The bottom layer of rice absorbs all the chicken juices as it cooks, giving it a tender texture and rich flavor, while the top layer of rice turns out white and fluffy. Buried in the Biryani, you’ll find whole cuts of succulent chicken bursting with flavor from the potent array of spices, herbs, and aromatics it’s marinated in."}
+                    min={10}
+                    ideal={50}
+                    max={100}
+                    readMoreText={"Read more..."}
+                />
+                </p>
                 </div>
-
-                <div
-                style={{
-                    backgroundColor: 'blue',
-                    position: 'absolute',
-                    width: '374px',
-                    height: '120px',
-                    left: '0px',
-                    marginTop: '150px',
-                }}>
-                </div>
-            </div>
+            </div> */}
 
             {/* Bottom NavBar */}
             <Box sx={{ pb: 7 }} ref={ref}>
