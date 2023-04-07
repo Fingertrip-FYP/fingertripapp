@@ -11,7 +11,7 @@ function Splash() {
       }, [navigate]);
 
     return(
-        <div style={{backgroundImage: `url('https://media.geeksforgeeks.org/wp-content/uploads/rk.png')`, height: '100vh'}}></div>
+        <div style={{backgroundImage: `url('https://drive.google.com/uc?export=view&id=16ZNQvP6hF7B6AEDKCjkYZJbB3o-_BMZw')`, height: '100vh'}}></div>
     )
 }
 
