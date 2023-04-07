@@ -46,7 +46,12 @@ function Home() {
 
     return (
         // Set background color
-        <div style={{backgroundImage: `url('https://media.geeksforgeeks.org/wp-content/uploads/rk.png')`, height: '100vh'}}>
+        <div
+        style={{
+            backgroundImage: `url('https://drive.google.com/uc?export=view&id=1HmhdcQ9EJRDdsKHn5U0Wexn_Z-vEvrFE')`,
+            height: '100vh',
+            color: '#36454F'
+        }}>
             
             {/* Div to wrap */}
             <div
@@ -57,8 +62,17 @@ function Home() {
                 left: '20px',
                 top: '40px',
                 }}>
+                    <div
+                    style={{
+                        backgroundImage: `url('https://drive.google.com/uc?export=view&id=1wqyYC3dY-D2WaIEXLhIWhEVuNeqwt3WV')`,
+                        position: 'absolute',
+                        width: '36px',
+                        height: '42px',
+                        left: '0px',
+                        top: '0px',
+                    }}></div>
                     {/* Displays guest name */}
-                    <h4
+                    <p
                     style={{
                         position: 'absolute',
                         width: '148px',
@@ -69,14 +83,14 @@ function Home() {
                         textAlign: 'center',
                         color: '#36454F',
                     }}>
-                        Welcome Home
-                        </h4>
+                        Welcome Varun
+                        </p>
 
                     {/* Displays room no. */}
-                    <h5
+                    <p
                     style={{
                         position: 'absolute',
-                        width: '97px',
+                        width: '120px',
                         height: '21px',
                         left: '40px',
                         top: '32px',
@@ -85,7 +99,7 @@ function Home() {
                         color: '#36454F',
                     }}>
                         Room No. 305
-                        </h5>
+                        </p>
 
                     {/* Search bar */}
                     <div
@@ -110,6 +124,7 @@ function Home() {
                     </div>
                 </div>
 
+            {/* 3 main options */}
             <div
             style={{
                 display: 'flex',
@@ -119,58 +134,130 @@ function Home() {
                 padding: '0px',
                 gap: '67px',
                 position: 'absolute',
-                width: '370px',
+                width: '300px',
                 height: '113px',
                 left: '33px',
                 top: '223px',
             }}>
                 <div
                 style={{
-                    backgroundColor: 'blue',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     padding: '0px',
                     gap: '9px',
-                    width: '84px',
+                    width: '72px',
                     height: '113px',
                     flex: 'none',
                     order: '0',
                     flexGrow: '0',
                 }}>
+                    <div
+                    style={{
+                        backgroundImage: `url('https://drive.google.com/uc?export=view&id=1b_tuVESbjzD-jlovzQavxNCJCVtxkTMO')`,
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '10px',
+                        flex: 'none',
+                        order: '0',
+                        flexGrow: '0',
+                    }}></div>
+                    <p
+                    style={{
+                        margin: '0',
+                        width: '42px',
+                        height: '24px',
+                        fontFamily: 'Poppins',
+                        fontStyle: 'italic',
+                        fontWeight: '400',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        color: '#36454F',
+                        flex: 'none',
+                        order: '1',
+                        flexGrow: '0',
+                    }}>Food</p>
                 </div>
                 <div
                 style={{
-                    backgroundColor: 'blue',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     padding: '0px',
                     gap: '9px',
-                    width: '83px',
+                    width: '72px',
                     height: '113px',
                     flex: 'none',
                     order: '1',
                     flexGrow: '0',
-                }}> 
+                }}>
+                    <div
+                    style={{
+                        backgroundImage: `url('https://drive.google.com/uc?export=view&id=1LrGCdxa14BcJrLygJh6teWqDF1Jfquec')`,
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '10px',
+                        flex: 'none',
+                        order: '0',
+                        flexGrow: '0',
+                    }}></div>
+                    <p
+                    style={{
+                        margin: '0',
+                        width: '42px',
+                        height: '24px',
+                        fontFamily: 'Poppins',
+                        fontStyle: 'italic',
+                        fontWeight: '400',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        color: '#36454F',
+                        flex: 'none',
+                        order: '1',
+                        flexGrow: '0',
+                    }}>Services</p>
                 </div>
                 <div
                 style={{
-                    backgroundColor: 'blue',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
                     padding: '0px',
                     gap: '9px',
-                    width: '83px',
+                    width: '72px',
                     height: '113px',
                     flex: 'none',
                     order: '2',
                     flexGrow: '0',                    
                 }}>
-
+                    <div
+                    style={{
+                        backgroundImage: `url('https://drive.google.com/uc?export=view&id=1XMe8DdZNCTdvF81HxuVKz_E6Bcwo2vMa')`,
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '10px',
+                        flex: 'none',
+                        order: '0',
+                        flexGrow: '0',
+                    }}></div>
+                    <p
+                    style={{
+                        margin: '0',
+                        width: '42px',
+                        height: '24px',
+                        fontFamily: 'Poppins',
+                        fontStyle: 'italic',
+                        fontWeight: '400',
+                        fontSize: '16px',
+                        lineHeight: '24px',
+                        color: '#36454F',
+                        flex: 'none',
+                        order: '1',
+                        flexGrow: '0',
+                    }}>Explore</p>
                 </div>
             </div>
+
             {/* Hotel Slogan */}
             <h2
             style={{
@@ -186,13 +273,12 @@ function Home() {
             ref={scrollRef}
             style={{
                 position: 'absolute',
-                // left: '33px',
                 top: '530px',
                 display: 'flex',
                 overflow: 'auto',
                 scrollSnapType: 'x mandatory',
-                width: '390px',
-                height: '250px',
+                width: '380px',
+                height: '200px',
                 marginRight: '50px'
             }}>
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -201,9 +287,10 @@ function Home() {
                     backgroundColor: 'aqua',
                     fontSize: '50px',
                     width: '300px',
-                    height: '250px',
+                    height: '200px',
                     flexShrink: 0,
-                    color: '#fff',
+                    backgroundImage: `url('https://drive.google.com/uc?export=view&id=1nhGy3su-xuQsRBwunGOKSpIFvSOyThsQ')`,
+                    color: '#FFFFFF',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -223,7 +310,7 @@ function Home() {
                     setValue(newValue);
                 }}>
                     <Link to="/home">
-                        <BottomNavigationAction label="Home" icon={<HomeIcon />}/>
+                        <BottomNavigationAction label="Home" icon={<HomeIcon />}/>Home
                     </Link>
                     <Link to="/food">
                         <BottomNavigationAction label="Food" icon={<RestaurantIcon />} />
