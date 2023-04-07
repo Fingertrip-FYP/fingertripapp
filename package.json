@@ -19,8 +19,12 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-search-box": "^3.0.0",
+    "react-slide-button": "^2.0.0",
+    "react-slider": "^2.0.4",
     "react-snap-carousel": "^0.3.1",
     "react-spinners": "^0.13.8",
+    "reactjs-popup": "^2.0.5",
+    "rn-slide-button": "^1.0.3",
     "styled-components": "^5.3.9",
     "web-vitals": "^2.1.4"
   },

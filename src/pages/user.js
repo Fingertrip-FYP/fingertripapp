@@ -1,5 +1,5 @@
 import React from "react";
-import ReactSearchBox from "react-search-box";
+// import ReactSearchBox from "react-search-box";
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -10,14 +10,14 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 import ExploreIcon from '@mui/icons-material/Explore';
 import PersonIcon from '@mui/icons-material/Person';
-import { useSnapCarousel } from 'react-snap-carousel';
+// import { useSnapCarousel } from 'react-snap-carousel';
 import { Link } from "react-router-dom";
 
 function User() {
     const [value, setValue] = React.useState(0);
     const ref = React.useRef(null);
     
-    {/* Bottom NavBar */}
+    // {/* Bottom NavBar */}
     <Box sx={{ pb: 7 }} ref={ref}>
     <CssBaseline />
     <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
