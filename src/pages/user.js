@@ -27,11 +27,12 @@ function User() {
                 background: 'rgba(250, 249, 246, 0.9)',
                 position: 'absolute',
                 width: '430px',
-                height: '835px',
+                height: '700px',
                 left: '0px',
                 top: '182px',
                 overflowY: 'scroll',
             }}>
+                {/* Guest Name */}
                 <div
                 style={{
                     position: 'absolute',
@@ -49,6 +50,7 @@ function User() {
                 }}>
                     Varun Khadayate
                 </div>
+                {/* Guest Details */}
                 <div
                 style={{
                     position: 'absolute',
@@ -68,6 +70,7 @@ function User() {
                     emailid@gmail.com <br />
                     7036201903 <br />
                 </div>
+                {/* Options Scroller */}
                 <div
                 style={{
                     position: 'absolute',
@@ -92,7 +95,6 @@ function User() {
                         Call Reception/Help Center
                     </div>
                 </div>
-                <a href="https://rzp.io/l/RzVhpilWpM" target="_blank">
                 <div
                 style={{
                     position: 'absolute',
@@ -100,6 +102,151 @@ function User() {
                     height: '40px',
                     left: '50px',
                     top: '300px',
+                    color: 'blue',
+                    border: '1px solid #1200DD',
+                    borderRadius: '10px',
+                }}>
+                    <div
+                    style={{
+                        position: 'absolute',
+                        width: '180px',
+                        height: '20px',
+                        left: '77px',
+                        top: '30%',
+                        fontSize: '13px',
+                        lineHeight: '20px',
+                    }}>
+                        Order History
+                    </div>
+                </div>
+                <div
+                style={{
+                    position: 'absolute',
+                    width: '340px',
+                    height: '40px',
+                    left: '50px',
+                    top: '350px',
+                    color: 'blue',
+                    border: '1px solid #1200DD',
+                    borderRadius: '10px',
+                }}>
+                    <div
+                    style={{
+                        position: 'absolute',
+                        width: '180px',
+                        height: '20px',
+                        left: '77px',
+                        top: '30%',
+                        fontSize: '13px',
+                        lineHeight: '20px',
+                    }}>
+                        Payments
+                    </div>
+                </div>
+                <div
+                style={{
+                    position: 'absolute',
+                    width: '340px',
+                    height: '40px',
+                    left: '50px',
+                    top: '400px',
+                    color: 'blue',
+                    border: '1px solid #1200DD',
+                    borderRadius: '10px',
+                }}>
+                    <div
+                    style={{
+                        position: 'absolute',
+                        width: '180px',
+                        height: '20px',
+                        left: '77px',
+                        top: '30%',
+                        fontSize: '13px',
+                        lineHeight: '20px',
+                    }}>
+                        FAQ
+                    </div>
+                </div>
+                <div
+                style={{
+                    position: 'absolute',
+                    width: '340px',
+                    height: '40px',
+                    left: '50px',
+                    top: '450px',
+                    color: 'blue',
+                    border: '1px solid #1200DD',
+                    borderRadius: '10px',
+                }}>
+                    <div
+                    style={{
+                        position: 'absolute',
+                        width: '180px',
+                        height: '20px',
+                        left: '77px',
+                        top: '30%',
+                        fontSize: '13px',
+                        lineHeight: '20px',
+                    }}>
+                        Change Language
+                    </div>
+                </div>
+                <div
+                style={{
+                    position: 'absolute',
+                    width: '340px',
+                    height: '40px',
+                    left: '50px',
+                    top: '500px',
+                    color: 'blue',
+                    border: '1px solid #1200DD',
+                    borderRadius: '10px',
+                }}>
+                    <div
+                    style={{
+                        position: 'absolute',
+                        width: '180px',
+                        height: '20px',
+                        left: '77px',
+                        top: '30%',
+                        fontSize: '13px',
+                        lineHeight: '20px',
+                    }}>
+                        About Us
+                    </div>
+                </div>
+                <div
+                style={{
+                    position: 'absolute',
+                    width: '340px',
+                    height: '40px',
+                    left: '50px',
+                    top: '550px',
+                    color: 'blue',
+                    border: '1px solid #1200DD',
+                    borderRadius: '10px',
+                }}>
+                    <div
+                    style={{
+                        position: 'absolute',
+                        width: '180px',
+                        height: '20px',
+                        left: '77px',
+                        top: '30%',
+                        fontSize: '13px',
+                        lineHeight: '20px',
+                    }}>
+                        Give Feedback
+                    </div>
+                </div>
+                <a href="https://rzp.io/l/RzVhpilWpM" target="_blank" rel="noreferrer">
+                <div
+                style={{
+                    position: 'absolute',
+                    width: '340px',
+                    height: '40px',
+                    left: '50px',
+                    top: '600px',
                     color: 'red',
                     border: '1px solid red',
                     borderRadius: '10px',
