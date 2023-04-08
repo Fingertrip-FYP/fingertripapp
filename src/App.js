@@ -8,7 +8,6 @@ import Food from './pages/food';
 import Services from './pages/services';
 import User from './pages/user';
 import Explore from './pages/explore';
-import Cart from './pages/cart';
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
         <Route path="services" element={<Services />} />
         <Route path="user" element={<User />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="cart" element={<Cart />} />
       </Routes>
     </div>
 

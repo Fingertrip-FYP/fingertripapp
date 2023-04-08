@@ -17,22 +17,13 @@ function Splash() {
             height: '100vh',
             color: '#36454F'
             }}>
-                <div
-                    style={{
-                        backgroundImage: `url('https://drive.google.com/uc?export=view&id=1wqyYC3dY-D2WaIEXLhIWhEVuNeqwt3WV')`,
-                        position: 'absolute',
-                        width: '36px',
-                        height: '42px',
-                        left: '0px',
-                        top: '0px',
-                    }}></div>
             <p
             style={{
                 position: 'absolute',
-                width: '249px',
+                width: '220px',
                 height: '45px',
-                left: '90px',
-                top: '383px',
+                marginLeft: '100px',
+                marginTop: '383px',
                 fontFamily: 'Poppins',
                 fontStyle: 'normal',
                 fontWeight: '700',
@@ -46,8 +37,8 @@ function Splash() {
                 position: 'absolute',
                 width: '305px',
                 height: '36px',
-                left: '62px',
-                top: '453px',
+                marginLeft: '62px',
+                marginTop: '453px',
                 fontFamily: 'Poppins',
                 fontStyle: 'normal',
                 fontWeight: '600',
