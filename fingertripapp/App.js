@@ -7,14 +7,18 @@ import {
   Button, 
   SafeAreaView, 
   Text, 
-  FlatList 
+  FlatList, 
+  ScrollView, 
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CarouselCards from './pages/carouselcards';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import * as i18n from './pages/i18n';
 // import LocalizationContext from './pages/localisationcontext';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
@@ -38,12 +42,29 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerLeft: null}}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+function EmptyScreen() {
+  return <View />;
+}
+
+// // Bottom Navbar
+// function NavBar() {
+//   return(
+//     <Tab.Navigator>
+//       <Tab.Screen name="Home" component={Home} />
+//       <Tab.Screen name="Food" component={EmptyScreen} />
+//       <Tab.Screen name="Service" component={EmptyScreen} />
+//       <Tab.Screen name="Explore" component={EmptyScreen} />
+//       <Tab.Screen name="User" component={EmptyScreen} />
+//     </Tab.Navigator>
+//   );
+// }
 
 // SignIn Screen
 function SignIn({navigation}) {
@@ -135,7 +156,7 @@ function Welcome({navigation}) {
 // }
 
 // Home Screen
-function Home() {
+function Home({ navigation }) {
   // Search Bar
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -205,33 +226,43 @@ function Home() {
     alert('Id : ' + item.id + ' Title : ' + item.title);
   };
 
-  // 3 main options
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.searchbarcontainer}>
-        <TextInput
-          style={styles.searchbarinput}
-          onChangeText={(text) => searchFilterFunction(text)}
-          value={search}
-          underlineColorAndroid="transparent"
-          placeholder="Search Here"
-        />
-        <FlatList
-          data={filteredDataSource}
-          keyExtractor={(item, index) => index.toString()}
-          // ItemSeparatorComponent={ItemSeparatorView}
-          // renderItem={ItemView}
-        />
-      </View>
-      <View style={styles.mainoptions}>
-        <View style={[styles.box, {flex: 1, backgroundColor: 'red'}]} />
-        <View style={[styles.box, {flex: 1, backgroundColor: 'orange'}]} />
-        <View style={[styles.box, {flex: 1, backgroundColor: 'green'}]} />
-      </View>
-      <View style={styles.tagcontainer}>
-        <Text style={styles.tagline}>Luxury is in the details!!</Text>
-      </View>
+      <ScrollView>
+          {/* SearchBar */}
+        <View style={styles.searchbarcontainer}>
+          <TextInput
+            style={styles.searchbarinput}
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
+            underlineColorAndroid="transparent"
+            placeholder="Search Here"
+          />
+          <FlatList
+            data={filteredDataSource}
+            keyExtractor={(item, index) => index.toString()}
+            // ItemSeparatorComponent={ItemSeparatorView}
+            // renderItem={ItemView}
+          />
+        </View>
+        
+        {/* Main Options */}
+        <View style={styles.mainoptions}>
+          <View style={[styles.box, {flex: 1, backgroundColor: 'red'}]} />
+          <View style={[styles.box, {flex: 1, backgroundColor: 'orange'}]} />
+          <View style={[styles.box, {flex: 1, backgroundColor: 'green'}]} />
+        </View>
+
+        {/* Tagline */}
+        <View style={styles.tagcontainer}>
+          <Text style={styles.tagline}>Luxury is in the details!!</Text>
+        </View>
+        
+        {/* Ads Promotion */}
+        <SafeAreaView style={styles.adscontainer}>
+          <CarouselCards />
+        </SafeAreaView>        
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -278,8 +309,13 @@ const styles = StyleSheet.create({
     height: 150,
   },
   tagcontainer: {
-    padding: 50,
+    padding: 30,
     flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  adscontainer: {
+    backgroundColor: '#fff',
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });
