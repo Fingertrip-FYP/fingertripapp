@@ -1,0 +1,8 @@
+{
+    "appId": "fingertrip-sjlqp",
+    "appUrl": "https://realm.mongodb.com/groups/645b12c170632d307a821c73/apps/645b1990cd2a022726cc6eba",
+    "baseUrl": "https://realm.mongodb.com",
+    "clientApiBaseUrl": "https://asia-south1.gcp.realm.mongodb.com",
+    "dataApiBaseUrl": "https://asia-south1.gcp.data.mongodb-api.com",
+    "dataSourceName": "mongodb-atlas"
+}
