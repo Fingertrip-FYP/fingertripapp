@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {StyleSheet, SafeAreaView, Text, Button} from 'react-native';
-import LocalizationContext from './context/LocalizationContext';
+import LocalizationContext from './localisationcontext';
 
 function HomeScreen(props) {
   const {localizationChange} = props;
