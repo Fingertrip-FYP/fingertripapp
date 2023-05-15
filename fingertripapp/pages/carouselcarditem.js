@@ -17,7 +17,6 @@ const CarouselCardItem = ({ item, index }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
     borderRadius: 8,
     width: ITEM_WIDTH,
     shadowColor: "#000",
@@ -30,8 +29,8 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   image: {
-    width: ITEM_WIDTH,
-    height: 300,
+    width: 300,
+    height: 250,
   },
 })
 

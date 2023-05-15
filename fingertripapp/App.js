@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { 
   View, 
   TextInput, 
@@ -10,23 +10,21 @@ import {
   ScrollView, 
   Pressable, 
   Image, 
+  Alert, 
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CarouselCards from './pages/carouselcards';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import {Credentials} from 'realm';
-// import * as i18n from './pages/i18n';
-// import LocalizationContext from './pages/localisationcontext';
+import app from './backend/firebaseConfig';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
+import RBSheet from "react-native-raw-bottom-sheet";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-// const realm = Realm.App.getApp("645b595c036f883fb29d4481");
-
-// function logInAnonymousUser() {
-//   app.logIn(Credentials.anonymous());
-// }
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 export default function App() {
   return (
@@ -88,39 +86,62 @@ function NavBar() {
 
 // SignIn Screen
 function SignIn({navigation}) {
-  this.state = {
-    username: '',
+  const [value, setValue] = React.useState({
+    email: '',
     password: '',
+    error: ''
+  })
+
+  async function signIn() {
+    if (value.email === '' || value.password === '') {
+      setValue({
+        ...value,
+        error: 'Email and password are mandatory.'
+      })
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, value.email, value.password);
+      const docRef = await setDoc(doc(db, "users", "guest"), {
+        email: value.email,
+      });
+      navigation.navigate(EnterName)
+    } catch (error) {
+      setValue({
+        ...value,
+        error: error.message,
+      })
+    }
   }
-  // Verify auth
-  // function auth() {
-  //   const users = realm.collection("Users");
-  //   const curr_user = users.find({userid: username})
-  //   console.log(curr_user)
-  //   // () => navigation.navigate('Welcome')
-  // }
 
   return (
     <ImageBackground source={require('./assets/bg/signin.png')} style={styles.image}>
+
       <Text style={styles.screenname}>Sign In</Text>
-      <Text style={styles.inputhead}>User ID</Text>
+      
+      <Text style={styles.inputhead}>Email ID</Text>
       <TextInput
-        value={this.state.username}
-        onChangeText={(username) => this.setState({ username })}
-        placeholder={'Enter your User ID'}
+        value={value.email}
+        onChangeText={(text) => setValue({ ...value, email: text })}
+        placeholder={'Enter your email ID'}
         style={styles.input}
       />
+      
       <Text style={styles.inputhead}>Password</Text>
       <TextInput
-        value={this.state.password}
-        onChangeText={(password) => this.setState({ password })}
+        value={value.password}
+        onChangeText={(text) => setValue({ ...value, password: text })}
         placeholder={'Enter Password'}
         secureTextEntry={true}
         style={styles.input}
       />
-      <Pressable style={styles.submitbutton} onPress={() => navigation.navigate(EnterName)}>
+      
+      <Pressable style={styles.submitbutton} onPress={signIn}>
         <Text style={styles.submittext}>Continue</Text>
       </Pressable>
+
+      {!!value.error && <View style={styles.error}><Text>{value.error}</Text></View>}
     </ImageBackground>
   );
 }
@@ -130,29 +151,41 @@ function EnterName({navigation}) {
   // Verify auth
   // function auth() {
   //   const users = realm.collection("Users");
-  //   const curr_user = users.find({userid: username})
+  //   const curr_user = users.find({userid: email})
   //   console.log(curr_user)
   //   // () => navigation.navigate('Welcome')
   // }
-  const [guestname, setGuestname] = useState('');
-  const [roomno, setRoomno] = useState('');
+  const [value, setValue] = React.useState({
+    guestname: '',
+    roomno: '',
+  })
+
+  async function register() {
+    const userdata = doc(db, 'users', 'guest');
+    setDoc(
+      userdata, 
+      { 
+        name: value.guestname, 
+        roomno: value.roomno,
+      },
+      { merge: true });
+    navigation.navigate('Welcome')
+  }
 
   return (
     <ImageBackground source={require('./assets/bg/signin.png')} style={styles.image}>
       <Text style={styles.screenname}>Enter Your Name</Text>
       <TextInput
         placeholder={'Enter name here'}
-        onChangeText={newguestname => setGuestname({newguestname})}
+        onChangeText={(text) => setValue({ ...value, guestname: text })}
         style={styles.input}
       />
       <TextInput
         placeholder={'Enter room number'}
-        onChangeText={newroomno => setRoomno({newroomno})}
+        onChangeText={(text) => setValue({ ...value, roomno: text })}
         style={styles.input}
       />
-      <Pressable style={styles.submitbutton} onPress={() => navigation.navigate('Welcome', { 
-        params: { nameguest: 'kartik', noroom: '503' },
-        })}>
+      <Pressable style={styles.submitbutton} onPress={register}>
         <Text style={styles.submittext}>Submit</Text>
       </Pressable>
     </ImageBackground>
@@ -160,9 +193,7 @@ function EnterName({navigation}) {
 }
 
 // Welcome Screen
-function Welcome({ route, navigation }) {
-  const { nameguest } = route.params;
-
+function Welcome({ navigation }) {  
   useEffect(() => {
     const countTimer = setInterval(() => {
       navigation.navigate('HomePage')
@@ -176,46 +207,10 @@ function Welcome({ route, navigation }) {
   return(
     <ImageBackground source={require('./assets/bg/welcome.png')} style={styles.image}>
       <Image style={styles.welcomelogo} source={require('./assets/icons/room.png')}/>
-      <Text style={styles.welscreenname}>Welcome {JSON.stringify(nameguest)}</Text>
+      <Text style={styles.welscreenname}>Welcome</Text>
     </ImageBackground>
   )
   // {JSON.stringify(guestname)}
-}
-
-// Language Selection Screen
-function Language() {
-  const [locale, setLocale] = React.useState(i18n.DEFAULT_LANGUAGE);
-  const localizationContext = React.useMemo(
-    () => ({
-      t: (scope, options) => i18n.t(scope, {locale, ...options}),
-      locale,
-      setLocale,
-    }),
-    [locale],
-  );
-
-  const handleLocalizationChange = useCallback(
-    (newLocale) => {
-      const newSetLocale = i18n.setI18nConfig(newLocale);
-      setLocale(newSetLocale);
-    },
-    [locale],
-  );
-
-  useEffect(() => {
-    handleLocalizationChange();
-
-    RNLocalize.addEventListener('change', handleLocalizationChange);
-    return () => {
-      RNLocalize.removeEventListener('change', handleLocalizationChange);
-    };
-  }, []);
-
-  return (
-    <LocalizationContext.Provider value={localizationContext}>
-        <HomeScreen localizationChange={handleLocalizationChange} />
-      </LocalizationContext.Provider>
-  );
 }
 
 // Home Screen
@@ -317,23 +312,23 @@ function Home({ navigation }) {
           
           {/* Main Options */}
           <View style={styles.mainoptions}>
-            <View style={styles.box}>
-              <Image source={require('./assets/icons/Meal-option.png')} style={{backgroundColor: 'rgba(255, 255, 255, 0.6)', width: 84, height: 80}}></Image>
+            <Pressable style={styles.box} onPress={() => navigation.navigate(Food)}>
+              <Image source={require('./assets/icons/Meal-option.png')} style={{width: 80, height: 76}}></Image>
               <Text style={styles.optionstitle}>Food</Text>
-            </View>
-            <View style={styles.box}>
-              <Image source={require('./assets/icons/Services-option.png')} style={{backgroundColor: 'rgba(255, 255, 255, 0.6)', width: 84, height: 80}}></Image>
+            </Pressable>
+            <Pressable style={styles.box} onPress={() => navigation.navigate(Services)}>
+              <Image source={require('./assets/icons/Services-option.png')} style={{width: 80, height: 76}}></Image>
               <Text style={styles.optionstitle}>Services</Text>
-            </View>
-            <View style={styles.box}>
-              <Image source={require('./assets/icons/Explore-option.png')} style={{backgroundColor: 'rgba(255, 255, 255, 0.6)', width: 84, height: 80}}></Image>
+            </Pressable>
+            <Pressable style={styles.box} onPress={() => navigation.navigate(Explore)}>
+              <Image source={require('./assets/icons/Explore-option.png')} style={{width: 80, height: 76}}></Image>
               <Text style={styles.optionstitle}>Explore</Text>
-            </View>
+            </Pressable>
           </View>
 
           {/* Tagline */}
           <View style={styles.tagcontainer}>
-            <Text style={{fontWeight: 300, fontSize: 30}}>Luxury is in the details!!</Text>
+            <Text style={{fontWeight: 300, fontSize: 20}}>Luxury is in the details!!</Text>
           </View>
           
           {/* Ads Promotion */}
@@ -417,8 +412,13 @@ function Food() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{height: 40, backgroundColor: 'red'}}></View>
+    <ImageBackground source={require('./assets/bg/food.png')} style={styles.image}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ height: 100 }}>
+          <Image source={require('./assets/icons/room.png')} style={{ height: 50, width: 56, top: 40 }}/>
+          <Text style={{ left: 56, fontWeight: 500 }}>Room No. 503</Text>
+        </View>
+
         {/* SearchBar */}
         <View style={styles.searchbarcontainer}>
           <TextInput
@@ -433,17 +433,16 @@ function Food() {
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
-        <View>
+
+        <View style={styles.menu}>
           <ScrollView>
-            <FlatList
-              data={filteredDataSource}
-              keyExtractor={(item, index) => index.toString()}
-              ItemSeparatorComponent={ItemSeparatorView}
-              renderItem={ItemView}
-            />  
+            <View style={styles.menucard}>
+              <Text>Hello</Text>
+            </View>
           </ScrollView>
         </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
@@ -452,6 +451,24 @@ function Services() {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const cleaningref = useRef();
+  const essentialref = useRef();
+  const techref = useRef();
+  const laundryref = useRef();
+  const [value, setValue] = React.useState({
+    servicetitle: '',
+  })
+
+  async function register() {
+    const servicedata = doc(db, 'services', 'current');
+    setDoc(
+      servicedata, 
+      {
+        service: value.servicetitle,
+      },
+      );
+    navigation.navigate('Services')
+  }
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -518,8 +535,13 @@ function Services() {
   };
 
   return (
+  <ImageBackground source={require('./assets/bg/services.png')} style={styles.image}>
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{height: 40, backgroundColor: 'red'}}></View>
+      <View style={{ height: 100 }}>
+        <Image source={require('./assets/icons/room.png')} style={{ height: 50, width: 56, top: 40 }}/>
+        <Text style={{ left: 56, fontWeight: 500 }}>Room No. 503</Text>
+      </View>
+
       {/* SearchBar */}
       <View style={styles.searchbarcontainer}>
         <TextInput
@@ -534,19 +556,55 @@ function Services() {
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
-      <View>
-        <ScrollView>
-        <View>
-          <FlatList
-            data={filteredDataSource}
-            keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={ItemSeparatorView}
-            renderItem={ItemView}
-          />
-        </View>
-      </ScrollView>
-      </View>
+      
+      <Pressable style={[styles.servicescard, {left: 21, top: 220,}]} onPress={() => cleaningref.current.open()}>
+        <Image source={require('./assets/icons/Cleaning-services.png')} style={styles.cardimage}/>
+        <Text style={styles.cardtitle}>Cleaning Services</Text>
+        <RBSheet
+          ref={cleaningref}
+          closeOnDragDown={true}
+          closeOnPressMask={false}
+          customStyles={{
+            container: {
+              height: 500,
+            },
+            draggableIcon: {
+              backgroundColor: "#000",
+            },
+          }}
+        >
+          <Text style={{
+            position: 'absolute',
+            width: 227,
+            height: 39,
+            left: 102,
+            top: 34,
+            fontWeight: 500,
+            fontSize: 26,
+            lineHeight: 39,
+            textAlign: 'center',
+            color: '#36454F',
+            }}>Essential Delivery</Text>
+            <Pressable style={[styles.options, {left: 30, top: 93}]} onPress={send}>
+              <Image source={require('./assets/icons/Towel.png')} style={[styles.optionimage, {left: 0, top: 0}]}/>
+              <Text style={[styles.optiontitle, {left: 9, top: 70,}]}>Towel</Text>
+            </Pressable>
+          </RBSheet>
+      </Pressable>
+      <Pressable style={[styles.servicescard, {left: 21, top: 350,}]} onPress={() => cleaningref.current.open()}>
+        <Image source={require('./assets/icons/Essential-services.png')} style={styles.cardimage}/>
+        <Text style={styles.cardtitle}>Essential Services</Text>
+      </Pressable>
+      <Pressable style={[styles.servicescard, {left: 21, top: 500,}]} onPress={() => cleaningref.current.open()}>
+        <Image source={require('./assets/icons/Tech-support.png')} style={styles.cardimage}/>
+        <Text style={styles.cardtitle}>Tech Services</Text>
+      </Pressable>
+      <Pressable style={[styles.servicescard, {left: 21, top: 650,}]} onPress={() => cleaningref.current.open()}>
+        <Image source={require('./assets/icons/Laundry-services.png')} style={styles.cardimage}/>
+        <Text style={styles.cardtitle}>Laundry Services</Text>
+      </Pressable>
     </SafeAreaView>
+</ImageBackground>
   );
 }
 
@@ -703,9 +761,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   searchbarcontainer: {
-    marginTop: 30,
+    marginTop: 10,
     // alignSelf: 'center',
-    marginLeft: 20,
+    margin: 20,
   },
   searchbarinput: {
     width: 350,
@@ -718,13 +776,13 @@ const styles = StyleSheet.create({
   mainoptions: {
     width: 383,
     height: 113,
-    marginTop: 20,
+    marginTop: 50,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignSelf: 'center',
   },
   optionstitle: {
-    color: '#FAF9F6',
+    color: '#36454F',
   },
   box: {
     height: 113,
@@ -737,6 +795,7 @@ const styles = StyleSheet.create({
   },
   tagcontainer: {
     padding: 30,
+    margin: 30,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -745,5 +804,68 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 250,
     width: 392,
+  },
+  error: {
+    marginTop: 10,
+    padding: 10,
+    color: '#36454F',
+    alignSelf: 'center',
+    fontWeight: 200,
+  },
+  menu: {
+    padding: 20,
+  },
+  menucard: {
+    position: 'absolute',
+    width: 374,
+    height: 120,
+    left: 0,
+    top: 0,
+    backgroundColor: 'red',
+  },
+  servicescard: {
+    position: 'absolute',
+    width: 380,
+    height: 80,
+  },
+  cardimage: {
+    position: 'absolute',
+    width: 80,
+    height: 80,
+    left: 0,
+    top: 0,
+  },
+  cardtitle: {
+    position: 'absolute',
+    width: 175,
+    height: 24,
+    left: 137,
+    top: 29,
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: 20,
+    lineHeight: 24,
+    color: '#36454F',
+  },
+  options: {
+    position: 'absolute',
+    width: 70,
+    height: 97,
+  },
+  optionimage: {
+    position: 'absolute',
+    width: 70,
+    height: 70,
+  },
+  optiontitle: {
+    position: 'absolute',
+    width: 52,
+    height: 27,
+    fontStyle: 'italic',
+    fontWeight: 400,
+    fontSize: 18,
+    lineHeight: 27,
+    textAlign: 'center',
+    color: '#36454F',
   },
 });
